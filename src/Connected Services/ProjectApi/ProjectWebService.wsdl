@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tns3="http://ws.polarion.com/types" xmlns:intf="http://ws.polarion.com/ProjectWebService" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns1="http://ws.polarion.com/ProjectWebService-impl" xmlns:tns2="http://ws.polarion.com/ProjectWebService-types" xmlns:impl="http://ws.polarion.com/ProjectWebService" targetNamespace="http://ws.polarion.com/ProjectWebService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/ProjectWebService-impl">
+      <xsd:import namespace="http://ws.polarion.com/ProjectWebService-types" />
+      <xsd:import namespace="http://ws.polarion.com/types" />
+      <xsd:element name="createUser">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="createUserReturn" type="tns2:User" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContainedGroups">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectGroupURI" type="tns3:SubterraURI" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContainedGroupsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getContainedGroupsReturn" type="tns2:ProjectGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContainedProjects">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectGroupURI" type="tns3:SubterraURI" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getContainedProjectsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getContainedProjectsReturn" type="tns2:Project" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDeepContainedProjects">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectGroupURI" type="tns3:SubterraURI" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDeepContainedProjectsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getDeepContainedProjectsReturn" type="tns2:Project" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProject">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getProjectReturn" type="tns2:Project" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectAtLocation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="location" type="tns3:Location" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectAtLocationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getProjectAtLocationReturn" type="tns2:Project" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectByURI">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectURI" type="tns3:SubterraURI" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectByURIResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getProjectByURIReturn" type="tns2:Project" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectGroup">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectGroupURI" type="tns3:SubterraURI" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectGroupResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getProjectGroupReturn" type="tns2:ProjectGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectGroupAtLocation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="location" type="tns3:Location" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectGroupAtLocationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getProjectGroupAtLocationReturn" type="tns2:ProjectGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectUsers">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="projectID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProjectUsersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getProjectUsersReturn" type="tns2:User" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRootProjectGroup">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getRootProjectGroupResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getRootProjectGroupReturn" type="tns2:ProjectGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUser">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userID" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getUserReturn" type="tns2:User" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUserAvatarURL">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userURI" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUserAvatarURLResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getUserAvatarURLReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUserByUri">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="userURI" type="tns3:SubterraURI" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUserByUriResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getUserByUriReturn" type="tns2:User" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getUsers">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="getUsersResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="getUsersReturn" type="tns2:User" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="updateUser">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in0" type="tns2:User" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="updateUserResponse">
+        <xsd:complexType />
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/types">
+      <xsd:import namespace="http://ws.polarion.com/ProjectWebService-types" />
+      <xsd:complexType name="Text">
+        <xsd:sequence>
+          <xsd:element name="type" type="xsd:string" />
+          <xsd:element name="content" type="xsd:string" />
+          <xsd:element name="contentLossy" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="SubterraURI">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:complexType name="ArrayOfSubterraURI">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="SubterraURI" type="tns3:SubterraURI" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Location">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:complexType name="ArrayOfstring">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="string" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ws.polarion.com/ProjectWebService-types">
+      <xsd:import namespace="http://ws.polarion.com/types" />
+      <xsd:complexType name="User">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="description" type="tns3:Text" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="disabledNotifications" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="email" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="homePageContent" type="tns3:Text" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="voteURIs" type="tns3:ArrayOfSubterraURI" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="watcheURIs" type="tns3:ArrayOfSubterraURI" />
+        </xsd:sequence>
+        <xsd:attribute name="uri" type="tns3:SubterraURI" />
+        <xsd:attribute name="unresolvable" type="xsd:boolean" />
+      </xsd:complexType>
+      <xsd:complexType name="ProjectGroup">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="groupURIs" type="tns3:ArrayOfSubterraURI" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="location" type="tns3:Location" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="parentURI" type="tns3:SubterraURI" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="projectIDs" type="tns3:ArrayOfstring" />
+        </xsd:sequence>
+        <xsd:attribute name="uri" type="tns3:SubterraURI" />
+        <xsd:attribute name="unresolvable" type="xsd:boolean" />
+      </xsd:complexType>
+      <xsd:complexType name="Project">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="active" type="xsd:boolean" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="description" type="tns3:Text" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="finish" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="id" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lead" type="tns2:User" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="location" type="tns3:Location" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="lockWorkRecordsDate" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="name" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="projectGroupURI" type="tns3:SubterraURI" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="start" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="trackerPrefix" type="xsd:string" />
+        </xsd:sequence>
+        <xsd:attribute name="uri" type="tns3:SubterraURI" />
+        <xsd:attribute name="unresolvable" type="xsd:boolean" />
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getProjectRequest">
+    <wsdl:part name="parameters" element="tns1:getProject" />
+  </wsdl:message>
+  <wsdl:message name="getProjectByURIRequest">
+    <wsdl:part name="parameters" element="tns1:getProjectByURI" />
+  </wsdl:message>
+  <wsdl:message name="getUsersRequest">
+    <wsdl:part name="parameters" element="tns1:getUsers" />
+  </wsdl:message>
+  <wsdl:message name="updateUserResponse">
+    <wsdl:part name="parameters" element="tns1:updateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectGroupResponse">
+    <wsdl:part name="parameters" element="tns1:getProjectGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateUserRequest">
+    <wsdl:part name="parameters" element="tns1:updateUser" />
+  </wsdl:message>
+  <wsdl:message name="getRootProjectGroupResponse">
+    <wsdl:part name="parameters" element="tns1:getRootProjectGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserAvatarURLRequest">
+    <wsdl:part name="parameters" element="tns1:getUserAvatarURL" />
+  </wsdl:message>
+  <wsdl:message name="getUserByUriRequest">
+    <wsdl:part name="parameters" element="tns1:getUserByUri" />
+  </wsdl:message>
+  <wsdl:message name="createUserRequest">
+    <wsdl:part name="parameters" element="tns1:createUser" />
+  </wsdl:message>
+  <wsdl:message name="getProjectUsersResponse">
+    <wsdl:part name="parameters" element="tns1:getProjectUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserByUriResponse">
+    <wsdl:part name="parameters" element="tns1:getUserByUriResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserResponse">
+    <wsdl:part name="parameters" element="tns1:getUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUsersResponse">
+    <wsdl:part name="parameters" element="tns1:getUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserAvatarURLResponse">
+    <wsdl:part name="parameters" element="tns1:getUserAvatarURLResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectAtLocationRequest">
+    <wsdl:part name="parameters" element="tns1:getProjectAtLocation" />
+  </wsdl:message>
+  <wsdl:message name="getProjectAtLocationResponse">
+    <wsdl:part name="parameters" element="tns1:getProjectAtLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectGroupAtLocationRequest">
+    <wsdl:part name="parameters" element="tns1:getProjectGroupAtLocation" />
+  </wsdl:message>
+  <wsdl:message name="getProjectResponse">
+    <wsdl:part name="parameters" element="tns1:getProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDeepContainedProjectsRequest">
+    <wsdl:part name="parameters" element="tns1:getDeepContainedProjects" />
+  </wsdl:message>
+  <wsdl:message name="getProjectByURIResponse">
+    <wsdl:part name="parameters" element="tns1:getProjectByURIResponse" />
+  </wsdl:message>
+  <wsdl:message name="getContainedProjectsRequest">
+    <wsdl:part name="parameters" element="tns1:getContainedProjects" />
+  </wsdl:message>
+  <wsdl:message name="getDeepContainedProjectsResponse">
+    <wsdl:part name="parameters" element="tns1:getDeepContainedProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectGroupRequest">
+    <wsdl:part name="parameters" element="tns1:getProjectGroup" />
+  </wsdl:message>
+  <wsdl:message name="getContainedGroupsRequest">
+    <wsdl:part name="parameters" element="tns1:getContainedGroups" />
+  </wsdl:message>
+  <wsdl:message name="getContainedProjectsResponse">
+    <wsdl:part name="parameters" element="tns1:getContainedProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProjectGroupAtLocationResponse">
+    <wsdl:part name="parameters" element="tns1:getProjectGroupAtLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="getUserRequest">
+    <wsdl:part name="parameters" element="tns1:getUser" />
+  </wsdl:message>
+  <wsdl:message name="getRootProjectGroupRequest">
+    <wsdl:part name="parameters" element="tns1:getRootProjectGroup" />
+  </wsdl:message>
+  <wsdl:message name="getProjectUsersRequest">
+    <wsdl:part name="parameters" element="tns1:getProjectUsers" />
+  </wsdl:message>
+  <wsdl:message name="createUserResponse">
+    <wsdl:part name="parameters" element="tns1:createUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="getContainedGroupsResponse">
+    <wsdl:part name="parameters" element="tns1:getContainedGroupsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ProjectWebService">
+    <wsdl:operation name="createUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Create a user.
+@param in0 loginName the login of the user for creation.
+@since 3.2.3   </wsdl:documentation>
+      <wsdl:input name="createUserRequest" message="impl:createUserRequest" />
+      <wsdl:output name="createUserResponse" message="impl:createUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getContainedGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets all project groups located directly below a project group.
+@param projectGroupURI the URI of the project to get all project groups for.
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getContainedGroupsRequest" message="impl:getContainedGroupsRequest" />
+      <wsdl:output name="getContainedGroupsResponse" message="impl:getContainedGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getContainedProjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets all projects located directly below a project group.
+@param projectGroupURI the URI of the project to get all projects for.
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getContainedProjectsRequest" message="impl:getContainedProjectsRequest" />
+      <wsdl:output name="getContainedProjectsResponse" message="impl:getContainedProjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDeepContainedProjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets all projects located below a project group.
+@param projectGroupURI the URI of the project to get all projects for.   </wsdl:documentation>
+      <wsdl:input name="getDeepContainedProjectsRequest" message="impl:getDeepContainedProjectsRequest" />
+      <wsdl:output name="getDeepContainedProjectsResponse" message="impl:getDeepContainedProjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a project.
+@param projectID the ID of the project to get.   </wsdl:documentation>
+      <wsdl:input name="getProjectRequest" message="impl:getProjectRequest" />
+      <wsdl:output name="getProjectResponse" message="impl:getProjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProjectAtLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a project at given location.
+@param location repository location
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getProjectAtLocationRequest" message="impl:getProjectAtLocationRequest" />
+      <wsdl:output name="getProjectAtLocationResponse" message="impl:getProjectAtLocationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProjectByURI">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a project.
+@param projectURI the URI of the project to get.
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getProjectByURIRequest" message="impl:getProjectByURIRequest" />
+      <wsdl:output name="getProjectByURIResponse" message="impl:getProjectByURIResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProjectGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a project group.
+@param projectGroupURI the URI of the project group to get.   </wsdl:documentation>
+      <wsdl:input name="getProjectGroupRequest" message="impl:getProjectGroupRequest" />
+      <wsdl:output name="getProjectGroupResponse" message="impl:getProjectGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProjectGroupAtLocation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a project group at given location.
+@param location repository location
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getProjectGroupAtLocationRequest" message="impl:getProjectGroupAtLocationRequest" />
+      <wsdl:output name="getProjectGroupAtLocationResponse" message="impl:getProjectGroupAtLocationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProjectUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets users of a project.
+@param projectID the ID of the projects to get the users for.   </wsdl:documentation>
+      <wsdl:input name="getProjectUsersRequest" message="impl:getProjectUsersRequest" />
+      <wsdl:output name="getProjectUsersResponse" message="impl:getProjectUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getRootProjectGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets the root project group.   </wsdl:documentation>
+      <wsdl:input name="getRootProjectGroupRequest" message="impl:getRootProjectGroupRequest" />
+      <wsdl:output name="getRootProjectGroupResponse" message="impl:getRootProjectGroupResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a user.
+@param userID the ID of the user to get.   </wsdl:documentation>
+      <wsdl:input name="getUserRequest" message="impl:getUserRequest" />
+      <wsdl:output name="getUserResponse" message="impl:getUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserAvatarURL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets a user Avatar URL. It can be absolute, or relative to portal base URL.
+@param userURI the ID of the user (name of the argument is wrong)
+@since 3.6.0   </wsdl:documentation>
+      <wsdl:input name="getUserAvatarURLRequest" message="impl:getUserAvatarURLRequest" />
+      <wsdl:output name="getUserAvatarURLResponse" message="impl:getUserAvatarURLResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserByUri">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets an user.
+@param userURI user's URI.
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getUserByUriRequest" message="impl:getUserByUriRequest" />
+      <wsdl:output name="getUserByUriResponse" message="impl:getUserByUriResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Gets all users.
+@since 3.3   </wsdl:documentation>
+      <wsdl:input name="getUsersRequest" message="impl:getUsersRequest" />
+      <wsdl:output name="getUsersResponse" message="impl:getUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+Update a user.
+@param in0 user the user for update.
+@since 3.2.3   </wsdl:documentation>
+      <wsdl:input name="updateUserRequest" message="impl:updateUserRequest" />
+      <wsdl:output name="updateUserResponse" message="impl:updateUserResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProjectWebServiceSoapBinding" type="impl:ProjectWebService">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="createUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="createUserRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="createUserResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContainedGroups">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getContainedGroupsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getContainedGroupsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContainedProjects">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getContainedProjectsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getContainedProjectsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDeepContainedProjects">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDeepContainedProjectsRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getDeepContainedProjectsResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProject">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getProjectRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProjectResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectAtLocation">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getProjectAtLocationRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProjectAtLocationResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectByURI">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getProjectByURIRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProjectByURIResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectGroup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getProjectGroupRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProjectGroupResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectGroupAtLocation">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getProjectGroupAtLocationRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProjectGroupAtLocationResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectUsers">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getProjectUsersRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getProjectUsersResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getRootProjectGroup">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getRootProjectGroupRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRootProjectGroupResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUserRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUserResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserAvatarURL">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUserAvatarURLRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUserAvatarURLResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserByUri">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUserByUriRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUserByUriResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUsers">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUsersRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getUsersResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="updateUserRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="updateUserResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProjectWebServiceService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+      This service provides functionallity to get information
+      related to projects.
+		  </wsdl:documentation>
+    <wsdl:port name="ProjectWebService" binding="impl:ProjectWebServiceSoapBinding">
+      <wsdlsoap:address location="http://192.168.13.141/polarion/ws/services/ProjectWebService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

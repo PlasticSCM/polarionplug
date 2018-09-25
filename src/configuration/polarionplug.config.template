@@ -1,0 +1,20 @@
+﻿[
+   {
+      "name":"url",
+      "displayName":"Polarion URL",
+      "type":"string",
+      "description":"The base URL of your Polarion server."
+   },
+   {
+      "name":"user",
+      "displayName":"User",
+      "type":"string",
+      "description":"User name to connect to Polarion."
+   },
+   {
+      "name":"password",
+      "displayName":"Password",
+      "type":"password",
+      "description":"Password to connect to Polarion."
+   }
+]

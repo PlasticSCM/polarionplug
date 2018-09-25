@@ -1,0 +1,4 @@
+#!/bin/sh
+
+POLARIONPLUG_BIN_DIR=`dirname \`readlink -fn $0\``
+exec "/opt/plasticscm5/server/mono_setup" polarionplug mono "$POLARIONPLUG_BIN_DIR/polarionplug.exe" "$@"

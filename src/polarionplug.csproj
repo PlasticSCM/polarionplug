@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AFC2FBC1-0621-4ECF-B300-0119FEE7AD4D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PolarionPlug</RootNamespace>
+    <AssemblyName>polarionplug</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\polarionplug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\polarionplug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="api\Find.cs" />
+    <Compile Include="api\GetField.cs" />
+    <Compile Include="api\SessionBehavior.cs" />
+    <Compile Include="api\SessionInspector.cs" />
+    <Compile Include="api\SetField.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Connected Services\SessionApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TrackerApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\ProjectApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="LogConfig.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="PlugArguments.cs" />
+    <Compile Include="PolarionClient.cs" />
+    <Compile Include="WebSocketRequest.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="WebSocketClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="configuration\issuetracker-polarion.definition.conf" />
+    <None Include="configuration\polarionplug.config.template" />
+    <None Include="configuration\polarionplug.log.conf" />
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.createUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getContainedGroupsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getContainedProjectsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getDeepContainedProjectsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getProjectAtLocationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getProjectByURIResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getProjectGroupAtLocationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getProjectGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getProjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getProjectUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getRootProjectGroupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getUserAvatarURLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getUserByUriResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.getUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.updateUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.beginTransactionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.endSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.endTransactionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.hasSubjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.logInResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.logInWithTokenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\PolarionPlug.SessionApi.transactionExistsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\SessionApi\SessionWebService.wsdl" />
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Activity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.ActivitySource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addApproveeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addAssigneeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addCommentToActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addExternalLinkedRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addExternallyLinkedItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addHyperlinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addLinkedItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addLinkedItemWithRevResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addLinkedOslcItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addLinkedRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.addPlaningContraintResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Baseline.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.canCommentActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.canCurrentUserAddCommentToActivityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Category.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Change.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createAttachmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createCommentNewResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createDocumentCommentReferringWIResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createDocumentCommentReplyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createDocumentCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createWorkItemInModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createWorkItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createWorkRecordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.createWorkRecordWithTypeAndCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.CustomField.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.CustomFieldType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.deleteAttachmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.deleteBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.deleteModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.deleteWorkRecordResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.doAutoassignResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.doAutoSuspectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.editApprovalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.EnumOption.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.EnumOptionId.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Folder.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.generateHistoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getActivityByGlobalIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAllEnumOptionIdsForIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAllEnumOptionIdsForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAllEnumOptionsForIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAllEnumOptionsForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAllowedApproversResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAllowedAssigneesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAvailableActionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAvailableEnumOptionIdsForIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getAvailableEnumOptionIdsForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getBackLinkedWorkitemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getCategoriesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getCustomFieldKeysResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getCustomFieldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getCustomFieldTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getCustomFieldTypesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDefaultLanguageDefinitionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDefinedCustomFieldKeysResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDefinedCustomFieldTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDefinedCustomFieldTypesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDocumentLocationsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDocumentSpacesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getDurationHoursResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumControlKeyForIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumControlKeyForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionFromObjectUriForIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionFromObjectUriForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionsForIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionsForIdWithControlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionsForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionsForKeyWithControlResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionWithEnumIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getEnumOptionWithKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getFilteredEnumOptionsForKeyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getFolderForURIResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getFoldersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getInitialWorkflowActionForProjectAndTypeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getInitialWorkflowActionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLanguageDefinitionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLanguageDefinitionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLinkedResourcesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLocalizedWorkItemDescriptionFieldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLocalizedWorkItemDescriptionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLocalizedWorkItemTitleFieldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getLocalizedWorkItemTitleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleByLocationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleByLocationWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleByUriResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleByUriWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModulesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModulesSubFoldersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModulesWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleWorkItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getModuleWorkItemUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getOneDayLengthResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getRevisionByUriResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getRevisionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getTimepointsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getUnavailableActionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWikiPageByUriResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWikiPageByUriWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWikiPagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWikiPagesWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWikiPageUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWikiSpacesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemByIdResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemByIdsWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemByUriInRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemByUriInRevisionWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemByUriResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemByUriWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemsCountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemsLinkedToRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.getWorkItemsLinkedToRevisionWithFieldsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.isHistoryAvailableResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.isResolvedCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.LanguageDefinition.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.LinkedResource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.LinkedWorkItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listActivitySourcesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listAllActivitiesGlobalIdsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listAllActivitiesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listGroupActivitiesGlobalIdsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listGroupActivitiesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listProjectActivitiesGlobalIdsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.listProjectActivitiesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Module.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.moveWorkItemToDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.moveWorkItemToModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.performWorkflowActionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryBaselinesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModulesBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModulesInBaselineBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModulesInBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModulesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModuleUrisBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModuleUrisInBaselineBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModuleUrisInBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryModuleUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryRevisionsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryRevisionUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPagesBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPagesInBaselineBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPagesInBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPagesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPageUrisBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPageUrisInBaselineBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPageUrisInBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWikiPageUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsInBaselineBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsInBaselineLimitedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsInBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsInRevisionLimitedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsInRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsLimitedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemUrisBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemUrisInBaselineBySQLResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemUrisInBaselineLimitedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemUrisInBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemUrisLimitedResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.queryWorkItemUrisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeApproveeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeAssigneeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeCategoryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeExternalLinkedRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeExternallyLinkedItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeHyperlinkResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeLinkedItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removeLinkedRevisionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.removePlaningConstraintResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.resetWorkflowResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.reuseDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.reuseModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Revision.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.setCommentTagsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.setCustomFieldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.setFieldsNullResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.setLocalizedWorkItemDescriptionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.setLocalizedWorkItemTitleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.setResolvedCommentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.Text.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.TimePoint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateAttachmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateBaselineResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateDerivedDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateDerivedModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateModuleResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateTitleHeadingInDocumentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.updateWorkItemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.WikiPage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.WorkflowAction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\PolarionPlug.TrackerApi.WorkItem.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TrackerApi\TrackerWebService.wsdl" />
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.Project.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.ProjectGroup.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\PolarionPlug.ProjectApi.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProjectApi\ProjectWebService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="configuration\polarionplug.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SessionApi\" />
+    <WCFMetadataStorage Include="Connected Services\TrackerApi\" />
+    <WCFMetadataStorage Include="Connected Services\ProjectApi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProjectApi\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProjectApi\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ProjectApi\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrackerApi\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrackerApi\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TrackerApi\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SessionApi\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SessionApi\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\SessionApi\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
