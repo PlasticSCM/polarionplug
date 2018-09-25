@@ -40,7 +40,7 @@ issue statuses according to the build results.
 When a mergebot requires a Issue Tracker plug to work, you can select a Polarion Plug Configuration.
 
 <p align="center">
-  <img alt="Issue Tracker plug select" src="https://raw.githubusercontent.com/mig42/polarionplug/master/doc/img/issuetracker-plug-select.png" />
+  <img alt="Issue Tracker plug select" src="https://raw.githubusercontent.com/PlasticSCM/polarionplug/master/doc/img/issuetracker-plug-select.png" />
 </p>
 
 You can either select an existing configuration or create a new one.
@@ -49,7 +49,7 @@ When you create a new Polarion Plug Configuration, you have to fill in the follo
 
 <p align="center">
   <img alt="Polarionplug configuration example"
-       src="https://raw.githubusercontent.com/mig42/polarionplug/master/doc/img/configuration-example.png" />
+       src="https://raw.githubusercontent.com/PlasticSCM/polarionplug/master/doc/img/configuration-example.png" />
 </p>
 
 ## Polarion Configuration
