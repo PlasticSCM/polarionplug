@@ -4,7 +4,7 @@ The Polarion plug provides an interface to perform actions in a remote Polarion 
 for the Plastic SCM DevOps system.
 
 This is the source code used by the actual built-in Polarion plug. Use it as a reference
-to build your own CI plug!
+to build your own Issue Tracker plug!
 
 # Build
 The executable is built from .NET Framework code using the provided `src/Polarionplug.sln`
